@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import math
+
 """
 Main file
 """
@@ -25,4 +27,12 @@ except AssertionError:
 
 print(server.get_page(1, 3))
 print(server.get_page(3, 2))
-print(server.get_page(3000, 100))
+
+
+
+# result = 10
+# n_dataset = len(server.dataset())
+# total_pages = math.ceil(n_dataset / result)
+# print(total_pages)
+# print(server.get_page(10, result))
+# print(len(server.get_page(10, result)))
