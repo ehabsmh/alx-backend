@@ -38,24 +38,30 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        indexed_data = self.indexed_dataset()
+        """ if between two queries, certain rows are removed from the dataset,
+        the user does not miss items from dataset when changing page."""
+        assert (
+            index is not None
+            and index >= 0
+            and index < len(self.__indexed_dataset)
+        )
+
         data = []
-        assert index is not None and index >= 0 and index < len(indexed_data)
+        data_count = 0
+        for i, item in self.__indexed_dataset.items():
+            # data_count should be same to the page size
+            if data_count == page_size:
+                break
 
-        start_index = index
-        pg_size = page_size
-
-        while pg_size:
-            if indexed_data.get(start_index, None):
-                data.append(indexed_data[start_index])
-
-            start_index += 1
-            pg_size -= 1
+            # Define when should the appending start
+            if i >= index:
+                data.append(item)
+                # Count the appended data
+                data_count += 1
 
         return {
             "index": index,
-            "next_index": start_index if indexed_data.get(
-                start_index, None) else None,
+            "next_index": i,
             "page_size": len(data),
             "data": data
         }
