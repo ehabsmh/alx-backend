@@ -48,20 +48,20 @@ class Server:
 
         data = []
         data_count = 0
-        for i, item in self.__indexed_dataset.items():
-            # data_count should be same to the page size
+        for indexed_key, item in self.__indexed_dataset.items():
+            # Count of the appended data should be same to the page size
             if data_count == page_size:
                 break
 
             # Define when should the appending start
-            if i >= index:
+            if indexed_key >= index:
                 data.append(item)
                 # Count the appended data
                 data_count += 1
 
         return {
             "index": index,
-            "next_index": i,
+            "next_index": indexed_key,
             "page_size": len(data),
             "data": data
         }
