@@ -1,4 +1,4 @@
-# This project is about impelementing different caching mechanisms such as LIFO, FIFO, LRU, and MRU
+# This project is about impelementing different caching replacement policies such as LIFO, FIFO, LRU, and MRU
 
 - **pycodestyle used as a code formatter.**
 - **All py files are executable.**
