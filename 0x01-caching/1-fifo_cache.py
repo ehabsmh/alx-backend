@@ -15,13 +15,13 @@ class FIFOCache(BaseCaching):
 
         self.cache_data[key] = item
 
+        # If cache's full, get the first item inserted in cache_data and del it
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            # Get the first item was inserted in cache_data and delete it.
             first_item = list(self.cache_data.keys())[0]
             print("DISCARD:", first_item)
             self.cache_data.pop(first_item)
 
-    # ______________________________________________________________________
+    # _____________________________________________________________________________
 
     def get(self, key: str) -> Union[None, str]:
         """Gets an items from `self.cache_data`"""
