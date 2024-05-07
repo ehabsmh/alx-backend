@@ -1,8 +1,8 @@
 # This project is about impelementing different caching mechanisms such as LIFO, FIFO, LRU, and MRU
 
-**- pycodestyle used as a code formatter**
-**- All py files are executable**
-**- Modules and functions well documented**
+- **pycodestyle used as a code formatter.**
+- **All py files are executable.**
+- **Modules and functions well documented.**
 
 
 ## Tasks
@@ -17,3 +17,7 @@ Implements a class `BasicCache` that inherits from `BaseCaching` and is a cachin
 - `def get(self, key):`
     - Must return the value in `self.cache_data` linked to `key`.
     - If `key` is `None` or if the `key` doesn’t exist in `self.cache_data`, return `None`.
+
+---
+
+### [1. FIFO caching](https://github.com/ehabsmh/alx-backend/tree/main/0x01-caching/1-fifo_cache.py)
