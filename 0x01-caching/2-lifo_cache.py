@@ -21,13 +21,11 @@ class LIFOCache(BaseCaching):
             self.cache_data.popitem()
             print("DISCARD:", last_item)
 
-        # If cache is full and it is existed item,
-        # remove and add it as the last item updated
-        elif (len(self.cache_data) == BaseCaching.MAX_ITEMS
-                and key in self.cache_data):
+        # Track access order for LIFO
+        if key in self.cache_data:
             # Get the index of the existing key
             exist_key_index: int = list(self.cache_data.keys()).index(key)
-            
+
             # Get the key from cache_data and delete it
             exist_key: str = list(self.cache_data.keys())[exist_key_index]
             self.cache_data.pop(exist_key)

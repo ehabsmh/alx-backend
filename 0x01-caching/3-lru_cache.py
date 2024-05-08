@@ -10,8 +10,8 @@ class LRUCache(BaseCaching):
 
     def __init__(self):
         super().__init__()
-        self.my_ordered_dict = OrderedDict()
-        self.cache_data = self.my_ordered_dict
+        self.ordered_cache_data = OrderedDict()
+        self.cache_data = self.ordered_cache_data
 
     def put(self, key: str, item: str) -> None:
         """Assigns the item to the key in `self.cache_data`"""
@@ -19,19 +19,18 @@ class LRUCache(BaseCaching):
         if None in (key, item):
             return
 
+        # Existance items access should be updated
+        if key in self.ordered_cache_data:
+            self.ordered_cache_data.move_to_end(key)
+
         # Delete least used item to insert a new item
-        if (len(self.my_ordered_dict) == self.MAX_ITEMS
-                and key not in self.my_ordered_dict):
-            least_used: str = list(self.my_ordered_dict.keys())[0]
-            self.my_ordered_dict.pop(least_used)
+        if (len(self.ordered_cache_data) == self.MAX_ITEMS
+                and key not in self.ordered_cache_data):
+            least_used: str = list(self.ordered_cache_data.keys())[0]
+            self.ordered_cache_data.pop(least_used)
             print("DISCARD:", least_used)
 
-        # Existance items access should be updated
-        elif (len(self.my_ordered_dict) == self.MAX_ITEMS
-                and key in self.my_ordered_dict):
-            self.my_ordered_dict.move_to_end(key)
-
-        self.my_ordered_dict.update({key: item})
+        self.ordered_cache_data.update({key: item})
 
     # _____________________________________________________________________________
 
@@ -41,6 +40,6 @@ class LRUCache(BaseCaching):
         if key is None or key not in self.cache_data:
             return None
 
-        self.my_ordered_dict.move_to_end(key)
+        self.ordered_cache_data.move_to_end(key)
 
         return self.cache_data[key]
