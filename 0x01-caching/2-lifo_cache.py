@@ -8,18 +8,31 @@ class LIFOCache(BaseCaching):
     """Defines LIFO replacement policy"""
 
     def put(self, key: str, item: str) -> None:
-        """
-        Assign to the dictionary `self.cache_data` the item `value` for the
-        key `key`
-        """
-        if key and item:
-            if len(
-                    self.cache_data
-            ) >= BaseCaching.MAX_ITEMS and key not in self.cache_data.keys():
-                to_pop = list(self.cache_data.keys())[-1]
-                self.cache_data.pop(to_pop)
-                print("DISCARD:", to_pop)
-            self.cache_data.update({key: item})
+        """Assigns the item to the key in `self.cache_data`"""
+
+        if None in (key, item):
+            return
+
+        # If cache is full and it is new item,
+        # get the last item inserted in cache_data and del it
+        if (len(self.cache_data) == BaseCaching.MAX_ITEMS
+                and key not in self.cache_data):
+            last_item: str = list(self.cache_data.keys())[-1]
+            self.cache_data.popitem()
+            print("DISCARD:", last_item)
+
+        # If cache is full and it is existed item,
+        # remove and add it as the last item updated
+        elif (len(self.cache_data) == BaseCaching.MAX_ITEMS
+                and key in self.cache_data):
+            # Get the index of the existing key
+            exist_key_index: int = list(self.cache_data.keys()).index(key)
+            
+            # Get the key from cache_data and delete it
+            exist_key: str = list(self.cache_data.keys())[exist_key_index]
+            self.cache_data.pop(exist_key)
+
+        self.cache_data[key] = item
 
     # _____________________________________________________________________________
 
