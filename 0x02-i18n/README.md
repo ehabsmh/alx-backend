@@ -55,12 +55,24 @@ $ pybabel init -i messages.pot -d translations -l fr
 Then edit files `translations/[en|fr]/LC_MESSAGES/messages.po` to provide the correct value for each message ID for each language. Use the following translations:
 
 
-msgid                   English                           French
+msgid...................English...................French
 __________________________________________________________________________________
-`home_title`      `"Welcome to Holberton"`	    `"Bienvenue chez Holberton"`
-`home_header`         `"Hello world!"`              `"Bonjour monde!"`
+`home_title`...................`"Welcome to Holberton"`...................`"Bienvenue chez Holberton"`
+
+`home_header`...................`"Hello world!"`...................`"Bonjour monde!"`
 
 Then compile your dictionaries with
 
 `$ pybabel compile -d translations`
 Reload the home page of your app and make sure that the correct messages show up.
+
+---
+
+### [4. Force locale with URL parameter](https://github.com/ehabsmh/alx-backend/blob/main/0x02-i18n/4-app.py)
+In this task, you will implement a way to force a particular locale by passing the `locale=fr` parameter to your app’s URLs.
+
+In your `get_locale` function, detect if the incoming request contains `locale` argument and ifs value is a supported locale, return it. If not or if the parameter is not present, resort to the previous default behavior.
+
+Now you should be able to test different translations by visiting `http://127.0.0.1:5000?locale=[fr|en]`.
+
+Visiting `http://127.0.0.1:5000/?locale=fr` should display this level 1 heading: 
