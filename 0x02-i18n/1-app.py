@@ -12,6 +12,16 @@ class Config:
 
 
 app = Flask(__name__)
-babel = Babel(app)
 app.config.from_object(Config)
+babel = Babel(app)
 
+@app.route('/', methods=['GET'], strict_slashes=False)
+def index():
+    """
+    hello world
+    """
+    return render_template('1-index.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
