@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """2. Get locale from request"""
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, _
 
 
 class Config:
@@ -25,7 +25,7 @@ def get_locale():
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index():
     """hello world"""
-    return render_template('2-index.html')
+    return render_template('3-index.html')
 
 
 if __name__ == '__main__':
